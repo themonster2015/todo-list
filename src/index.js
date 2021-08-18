@@ -27,7 +27,6 @@ if (!window.localStorage.getItem('todos')) {
 
 const arrSort = (arr) => arr.sort((a, b) => a.index - b.index);
 
-// function component() {
 const list = document.querySelector('ul');
 const sortedTodos = arrSort(todos);
 if (sortedTodos.length > 0) {
