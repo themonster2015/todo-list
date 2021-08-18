@@ -8,5 +8,6 @@ export default function toggleTodo(id, todos) {
     return e;
   });
   window.localStorage.setItem('todos', JSON.stringify(newtodos));
+  // eslint-disable-next-line
   location.reload();
 }
