@@ -47,6 +47,7 @@ if (sortedTodos.length > 0) {
     if (el.completed) {
       todo.classList.add('completed');
       checkbox.classList.add('disableCheckbox');
+      checkbox.checked = true;
     } else {
       todo.classList.add('uncomplete');
     }
