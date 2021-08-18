@@ -5,16 +5,11 @@
 ![Screen Shot 2021-08-17 at 16 28 17](https://user-images.githubusercontent.com/10905837/129967875-dc7e97e2-fcf5-4608-87b9-1a8c34bfc05b.png)
 
 
-
 ## Built With
 
 - Javascript
 - Webpack
 - Css
-
-
-
-
 
 
 ## Author
@@ -36,3 +31,4 @@ Give a ⭐️ if you like this project!
 ## 📝 License
 
 This project is [MIT](./MIT.md) licensed.
+
