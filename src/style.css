@@ -5,6 +5,9 @@ body {
 .completed {
   background-color: grey;
 }
+.disableCheckbox {
+  opacity: 0.5;
+}
 
 .todoItem {
   display: flex;
