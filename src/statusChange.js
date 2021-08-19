@@ -6,7 +6,8 @@ export default function toggleTodo(id, todos) {
     }
     return e;
   });
+  // saving the new updated changes to localStorage is done through this line:
   window.localStorage.setItem('todos', JSON.stringify(newtodos));
   // eslint-disable-next-line
-  location.reload();
+  //location.reload();
 }
