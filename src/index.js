@@ -1,5 +1,8 @@
 import './style.css';
 import toggleTodo from './statusChange';
+import {
+  add, edit, remove, clearCompleted,
+} from './crud';
 
 let todos;
 const dummyTodos = [{
@@ -40,24 +43,77 @@ if (sortedTodos.length > 0) {
     checkbox.type = 'checkbox';
     checkbox.addEventListener('click', (e) => {
       const id = e.target.parentNode.parentNode.getAttribute('id');
-      console.log(id);
       toggleTodo(id, todos);
     });
     titleCheckbox.appendChild(checkbox);
     if (el.completed) {
       todo.classList.add('completed');
       checkbox.classList.add('disableCheckbox');
+      checkbox.checked = true;
     } else {
       todo.classList.add('uncomplete');
     }
     const title = document.createElement('p');
     title.classList.add('title');
     title.innerText = el.description;
+    const iconContainer = document.createElement('div');
+    iconContainer.classList.add('iconContainer');
+    const delBtn = document.createElement('button');
+    delBtn.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
+    delBtn.classList.add('delBtn');
+    delBtn.id = `${el.index}`;
     const icon = document.createElement('i');
     icon.classList.add('fa', 'fa-ellipsis-v');
+    iconContainer.appendChild(delBtn);
+    iconContainer.appendChild(icon);
     titleCheckbox.appendChild(title);
     todo.appendChild(titleCheckbox);
-    todo.appendChild(icon);
+    todo.appendChild(iconContainer);
     list.appendChild(todo);
   });
 }
+const checkInput = (text) => text.trim().length > 0;
+
+const addTodo = document.getElementsByClassName('addInput');
+addTodo[0].addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    const text = e.target.value;
+    console.log(text);
+    if (checkInput(text)) {
+      add(todos, text);
+      location.reload();
+    } else {
+      alert('Empty text!');
+    }
+  }
+});
+
+const editTodo = document.querySelectorAll('.title');
+editTodo.forEach((field) => {
+  field.addEventListener('click', (e) => {
+    const id = e.target.parentNode.parentNode.getAttribute('id');
+    const text = e.target.innerText;
+    const newText = prompt('Edit your to-do item: ', text);
+    if (newText && checkInput(newText)) {
+      edit(todos, id, newText);
+      location.reload();
+    } else {
+      alert('Empty text!');
+    }
+  });
+});
+
+const removeTodos = document.querySelectorAll('.delBtn');
+removeTodos.forEach((field) => {
+  field.addEventListener('click', (e) => {
+    const id = e.target.parentNode.getAttribute('id');
+    remove(todos, Number(id));
+    location.reload();
+  });
+});
+const clearDone = document.getElementsByClassName('clearCompleted');
+clearDone[0].addEventListener('click', (e) => {
+  e.preventDefault();
+  clearCompleted(todos);
+  location.reload();
+});
