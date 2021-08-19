@@ -1,29 +1,14 @@
 import './style.css';
-import toggleTodo from './statusChange';
+import toggleTodo from './statusChange.js';
 import {
   add, edit, remove, clearCompleted,
-} from './crud';
+} from './crud.js';
 
 let todos;
-const dummyTodos = [{
-  description: 'wash the dish',
-  completed: false,
-  index: 1,
-},
-{
-  description: 'complete the to do list project',
-  completed: false,
-  index: 2,
-},
-{
-  description: 'feed the dog',
-  completed: false,
-  index: 0,
-},
-];
+
 if (!window.localStorage.getItem('todos')) {
   window.localStorage.setItem('todos', JSON.stringify(dummyTodos));
-  todos = dummyTodos;
+  todos = [];
 } else {
   todos = JSON.parse(window.localStorage.getItem('todos'));
 }
@@ -78,11 +63,12 @@ const addTodo = document.getElementsByClassName('addInput');
 addTodo[0].addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     const text = e.target.value;
-    console.log(text);
     if (checkInput(text)) {
       add(todos, text);
+      // eslint-disable-next-line
       location.reload();
     } else {
+      // eslint-disable-next-line
       alert('Empty text!');
     }
   }
@@ -93,11 +79,14 @@ editTodo.forEach((field) => {
   field.addEventListener('click', (e) => {
     const id = e.target.parentNode.parentNode.getAttribute('id');
     const text = e.target.innerText;
+    // eslint-disable-next-line
     const newText = prompt('Edit your to-do item: ', text);
     if (newText && checkInput(newText)) {
       edit(todos, id, newText);
+      // eslint-disable-next-line
       location.reload();
     } else {
+      // eslint-disable-next-line
       alert('Empty text!');
     }
   });
@@ -108,6 +97,7 @@ removeTodos.forEach((field) => {
   field.addEventListener('click', (e) => {
     const id = e.target.parentNode.getAttribute('id');
     remove(todos, Number(id));
+    // eslint-disable-next-line
     location.reload();
   });
 });
@@ -115,5 +105,6 @@ const clearDone = document.getElementsByClassName('clearCompleted');
 clearDone[0].addEventListener('click', (e) => {
   e.preventDefault();
   clearCompleted(todos);
+  // eslint-disable-next-line
   location.reload();
 });

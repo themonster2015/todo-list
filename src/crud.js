@@ -10,7 +10,7 @@ export const add = (todos, item) => {
 export const remove = (todos, id) => {
   const newTodos = todos.filter((el) => el.index !== id);
   newTodos.sort((a, b) => a.index - b.index);
-  for (let i = 1; i <= newTodos.length; i++) {
+  for (let i = 1; i <= newTodos.length; i += 1) {
     newTodos[i - 1].index = i;
   }
   console.log(newTodos);
