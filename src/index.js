@@ -7,8 +7,8 @@ import {
 let todos;
 
 if (!window.localStorage.getItem('todos')) {
-  window.localStorage.setItem('todos', JSON.stringify(dummyTodos));
   todos = [];
+  window.localStorage.setItem('todos', JSON.stringify(todos));
 } else {
   todos = JSON.parse(window.localStorage.getItem('todos'));
 }
