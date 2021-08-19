@@ -1,26 +1,14 @@
 import './style.css';
-import toggleTodo from './statusChange';
+import toggleTodo from './statusChange.js';
+import {
+  add, edit, remove, clearCompleted,
+} from './crud.js';
 
 let todos;
-const dummyTodos = [{
-  description: 'wash the dish',
-  completed: false,
-  index: 1,
-},
-{
-  description: 'complete the to do list project',
-  completed: false,
-  index: 2,
-},
-{
-  description: 'feed the dog',
-  completed: false,
-  index: 0,
-},
-];
+
 if (!window.localStorage.getItem('todos')) {
-  window.localStorage.setItem('todos', JSON.stringify(dummyTodos));
-  todos = dummyTodos;
+  todos = [];
+  window.localStorage.setItem('todos', JSON.stringify(todos));
 } else {
   todos = JSON.parse(window.localStorage.getItem('todos'));
 }
@@ -40,7 +28,6 @@ if (sortedTodos.length > 0) {
     checkbox.type = 'checkbox';
     checkbox.addEventListener('click', (e) => {
       const id = e.target.parentNode.parentNode.getAttribute('id');
-      console.log(id);
       toggleTodo(id, todos);
     });
     titleCheckbox.appendChild(checkbox);
@@ -54,11 +41,70 @@ if (sortedTodos.length > 0) {
     const title = document.createElement('p');
     title.classList.add('title');
     title.innerText = el.description;
+    const iconContainer = document.createElement('div');
+    iconContainer.classList.add('iconContainer');
+    const delBtn = document.createElement('button');
+    delBtn.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
+    delBtn.classList.add('delBtn');
+    delBtn.id = `${el.index}`;
     const icon = document.createElement('i');
     icon.classList.add('fa', 'fa-ellipsis-v');
+    iconContainer.appendChild(delBtn);
+    iconContainer.appendChild(icon);
     titleCheckbox.appendChild(title);
     todo.appendChild(titleCheckbox);
-    todo.appendChild(icon);
+    todo.appendChild(iconContainer);
     list.appendChild(todo);
   });
 }
+const checkInput = (text) => text.trim().length > 0;
+
+const addTodo = document.getElementsByClassName('addInput');
+addTodo[0].addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    const text = e.target.value;
+    if (checkInput(text)) {
+      add(todos, text);
+      // eslint-disable-next-line
+      location.reload();
+    } else {
+      // eslint-disable-next-line
+      alert('Empty text!');
+    }
+  }
+});
+
+const editTodo = document.querySelectorAll('.title');
+editTodo.forEach((field) => {
+  field.addEventListener('click', (e) => {
+    const id = e.target.parentNode.parentNode.getAttribute('id');
+    const text = e.target.innerText;
+    // eslint-disable-next-line
+    const newText = prompt('Edit your to-do item: ', text);
+    if (newText && checkInput(newText)) {
+      edit(todos, id, newText);
+      // eslint-disable-next-line
+      location.reload();
+    } else {
+      // eslint-disable-next-line
+      alert('Empty text!');
+    }
+  });
+});
+
+const removeTodos = document.querySelectorAll('.delBtn');
+removeTodos.forEach((field) => {
+  field.addEventListener('click', (e) => {
+    const id = e.target.parentNode.getAttribute('id');
+    remove(todos, Number(id));
+    // eslint-disable-next-line
+    location.reload();
+  });
+});
+const clearDone = document.getElementsByClassName('clearCompleted');
+clearDone[0].addEventListener('click', (e) => {
+  e.preventDefault();
+  clearCompleted(todos);
+  // eslint-disable-next-line
+  location.reload();
+});

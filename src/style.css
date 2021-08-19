@@ -57,3 +57,10 @@ ul {
   border: 0;
   color: lightgray;
 }
+
+.iconContainer {
+  width: 50px;
+  display: flex;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
