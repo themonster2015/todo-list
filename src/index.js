@@ -3,7 +3,7 @@ import toggleTodo from './statusChange.js';
 import {
   add, edit, remove, clearCompleted,
 } from './crud.js';
-import { dragstart, dragstop, drop } from './draggable';
+import { dragstart, dragstop, drop } from './draggable.js';
 
 let todos;
 
