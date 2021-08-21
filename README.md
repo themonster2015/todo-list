@@ -16,6 +16,15 @@
 - Webpack
 - Css
 
+## Setup
+Clone the repository with:
+
+```git clone https://github.com/themonster2015/todo-list.git```
+
+
+To install dependencies run:
+
+```npm install --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin style-loader css-loader```
 
 ## Author
 
