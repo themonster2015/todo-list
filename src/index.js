@@ -3,6 +3,7 @@ import toggleTodo from './statusChange.js';
 import {
   add, edit, remove, clearCompleted,
 } from './crud.js';
+import { dragstart, dragstop, drop } from './draggable.js';
 
 let todos;
 
@@ -19,8 +20,25 @@ const list = document.querySelector('ul');
 const sortedTodos = arrSort(todos);
 if (sortedTodos.length > 0) {
   sortedTodos.forEach((el) => {
-    const todo = document.createElement('div');
+    const todo = document.createElement('li');
     todo.setAttribute('id', `${el.index}`);
+    todo.draggable = true;
+    // (B2) DRAG START - YELLOW HIGHLIGHT DROPZONES
+    todo.addEventListener('dragstart', (e) => {
+      dragstart(e);
+    });
+    todo.addEventListener('dragover', (e) => {
+      dragstop(e);
+    });
+
+    // (B7) ON DROP - DO SOMETHING
+    todo.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const target = Number(e.target.id);
+      const source = Number(e.dataTransfer.getData('text'));
+      drop(sortedTodos, target, source);
+    });
+
     todo.classList.add('todoItem');
     const titleCheckbox = document.createElement('div');
 
