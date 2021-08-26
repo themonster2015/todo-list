@@ -23,7 +23,7 @@ describe('update Todo', () => {
   it('should update todo status', () => {
     expect(UpdateMock(2, todos)[1].completed).toBeFalsy();
   });
-	it('local storage should update todo status', () => {
+  it('local storage should update todo status', () => {
     expect(getStorageMock.getItem('todos')[1].completed).toBeFalsy();
   });
 });

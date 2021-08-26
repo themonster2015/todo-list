@@ -1,4 +1,4 @@
-import getStorageMock from "../__mocks__/getStorageMock";
+import getStorageMock from './getStorageMock';
 
 export default function UpdateMock(id, todos) {
   const newtodos = todos.map((e) => {
@@ -8,6 +8,6 @@ export default function UpdateMock(id, todos) {
     }
     return e;
   });
-	getStorageMock.setItem('todos', newtodos);
-	return newtodos
+  getStorageMock.setItem('todos', newtodos);
+  return newtodos;
 }

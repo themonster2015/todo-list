@@ -1,4 +1,3 @@
-import { dragstart } from '../draggable';
 import getStorageMock from './getStorageMock';
 
 const dragMock = (sortedTodos, target, source) => {
