@@ -1,4 +1,5 @@
 import editTodoMock from '../__mocks__/editTodoMock';
+import getStorageMock from '../__mocks__/getStorageMock';
 
 describe('edit Todo', () => {
   const todos = [
@@ -21,5 +22,8 @@ describe('edit Todo', () => {
   const text = 'Eat X 2';
   it('should update description', () => {
     expect(editTodoMock(todos, 2, text)[1].description).toEqual('Eat X 2');
+  });
+  it('local storage should update todo description', () => {
+    expect(getStorageMock.getItem('todos')[1].description).toEqual('Eat X 2');
   });
 });

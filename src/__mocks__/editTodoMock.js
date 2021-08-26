@@ -8,7 +8,7 @@ const editTodoMock = (todos, id, text) => {
     }
     return el;
   });
-  getStorageMock.setItem(newTodos);
+  getStorageMock.setItem('todos', newTodos);
   return newTodos;
 };
 
