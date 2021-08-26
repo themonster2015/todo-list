@@ -1,10 +1,12 @@
+import getStorage from './getStorage';
+
 export const add = (todos, item) => {
   todos.push({
     description: item,
     index: todos.length + 1,
     completed: false,
   });
-  window.localStorage.setItem('todos', JSON.stringify(todos));
+  getStorage(todos);
 };
 
 export const remove = (todos, id) => {
@@ -13,8 +15,7 @@ export const remove = (todos, id) => {
   for (let i = 1; i <= newTodos.length; i += 1) {
     newTodos[i - 1].index = i;
   }
-  console.log(newTodos);
-  window.localStorage.setItem('todos', JSON.stringify(newTodos));
+  getStorage(newTodos);
 };
 
 export const edit = (todos, id, text) => {
@@ -25,10 +26,10 @@ export const edit = (todos, id, text) => {
     }
     return el;
   });
-  window.localStorage.setItem('todos', JSON.stringify(newTodos));
+  getStorage(newTodos);
 };
 
 export const clearCompleted = (todos) => {
   const newTodos = todos.filter((el) => el.completed === false);
-  window.localStorage.setItem('todos', JSON.stringify(newTodos));
+  getStorage(newTodos);
 };
