@@ -31,7 +31,11 @@ To install dependencies run:
 👤 **Vo Thi Quynh Yen**
 
 - GitHub: [@themonster2015](https://github.com/themonster2015)
+  
+👤 **Oni Olajumuke Priscilla**
 
+- [@githubhandle](https://github.com/prolajumokeoni)
+- 
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
